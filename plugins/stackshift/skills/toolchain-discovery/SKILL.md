@@ -1,6 +1,8 @@
 ---
 name: toolchain-discovery
 description: Use when you need to identify what build, test, lint, type-check, and formatting tooling exists in a repository before running verification steps or assessing a project's development setup.
+user-invocable: false
+allowed-tools: Read, Glob, Grep
 ---
 
 Detect all build, test, lint, type-check, and formatting tooling in a repository. Produce a structured toolchain manifest covering every workspace.

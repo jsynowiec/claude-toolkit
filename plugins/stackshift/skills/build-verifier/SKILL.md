@@ -1,6 +1,8 @@
 ---
 name: build-verifier
 description: Use when you need to run a repository's build pipeline (lint, typecheck, tests, build) in a standardized order, classify any failures, or establish a baseline before making changes to detect regressions introduced by upgrades.
+user-invocable: false
+allowed-tools: Read, Glob, Grep, Bash
 ---
 
 Run a repository's build pipeline in a standardized order, classify failures, and detect regressions by diffing against a baseline.

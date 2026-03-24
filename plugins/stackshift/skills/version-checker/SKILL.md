@@ -1,6 +1,8 @@
 ---
 name: version-checker
 description: Use when you need to determine the latest stable or LTS versions of runtimes (Node.js, Python) or packages (npm, PyPI), check if current project versions are outdated or end-of-life, or identify upgrade paths from local versions to recommended targets.
+user-invocable: false
+allowed-tools: Read, Glob, WebFetch
 ---
 
 Check only the runtimes or packages the caller asks about. Do not scan all dependencies unprompted.

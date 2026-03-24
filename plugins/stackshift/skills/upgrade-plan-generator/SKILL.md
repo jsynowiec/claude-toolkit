@@ -1,6 +1,8 @@
 ---
 name: upgrade-plan-generator
 description: Use when you have completed analysis (version checks, API deltas, impact mapping, test gaps) and need to synthesize findings into an ordered, step-by-step migration plan that can be executed incrementally with verification at each step.
+user-invocable: false
+allowed-tools: Read
 ---
 
 Synthesize analysis outputs into a structured, dependency-aware migration plan. The plan must be executable by agents following the superpowers:executing-plans or superpowers:subagent-driven-development workflows.

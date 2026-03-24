@@ -1,6 +1,8 @@
 ---
 name: release-notes-retriever
 description: "Use when you need to fetch upstream release notes, changelogs, deprecation notices, or migration guides for a specific library or runtime version range. Use this before analyzing API changes or planning upgrades."
+user-invocable: false
+allowed-tools: Read, WebFetch, mcp__context7__resolve-library-id, mcp__context7__query-docs
 ---
 
 Fetch and distill upstream release notes, deprecation notices, and migration guides for a specific version range. Accept as input: package name, source repository (if known), current version, and target version.

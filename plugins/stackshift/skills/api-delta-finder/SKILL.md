@@ -1,6 +1,8 @@
 ---
 name: api-delta-finder
 description: Use when moving between major framework, library, or runtime versions to identify removed, renamed, or behavior-changing APIs. Use after fetching release notes to analyze the actual API surface changes and classify their risk.
+user-invocable: false
+allowed-tools: Read, Glob, Grep, Bash
 ---
 
 **REQUIRED SUB-SKILL:** Use stackshift:release-notes-retriever to fetch upstream documentation before running this analysis.
@@ -33,11 +35,7 @@ Parse the changelogs and migration guides retrieved by release-notes-retriever.
 When `@types/<package>` or built-in `.d.ts` files exist for both versions:
 
 1. Generate a unique run ID (e.g., a short random hex string) to avoid collisions with concurrent runs.
-2. Create two temporary directories using that ID:
-   ```
-   npm install --prefix /tmp/types-old-<run-id> @types/<package>@<source-compatible-version>
-   npm install --prefix /tmp/types-new-<run-id> @types/<package>@<target-compatible-version>
-   ```
+2. Install the type definitions for both versions into separate temporary directories, using the run ID to keep them isolated. Use the project's package manager and install into `/tmp/types-old-<run-id>` and `/tmp/types-new-<run-id>` respectively. Install only the `@types/<package>` (or equivalent built-in type package) at the source-compatible and target-compatible versions — no other dependencies needed.
 3. Diff the exported `.d.ts` files between the two directories.
 4. Identify every export that was removed, every function whose signature changed, every interface whose properties changed, and every type alias that was redefined.
 5. Cross-reference diff results with the doc-based findings. The diff catches changes that changelogs omit; the docs explain intent that diffs cannot convey.
