@@ -1,0 +1,24 @@
+{
+  "name": "claude-toolkit",
+  "owner": {
+    "name": "jsynowiec",
+    "url": "https://github.com/jsynowiec"
+  },
+  "metadata": {
+    "description": "Claude Code engineering toolkit. A set of handy, focused plugins helpful in everyday work.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "stackshift",
+      "source": "./plugins/stackshift",
+      "description": "Modernize legacy codebases, upgrade runtimes, migrate frameworks, and reduce technical debt",
+      "version": "0.1.0",
+      "owner": {
+        "name": "jsynowiec",
+        "url": "https://github.com/jsynowiec"
+      },
+      "category": "development"
+    }
+  ]
+}

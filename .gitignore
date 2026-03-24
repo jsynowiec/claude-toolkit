@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local files
+.claude/
+.worktrees/
+
+# Private journal (MCP tool data)
+.private-journal/
+
+# Dependencies
+node_modules/

@@ -1,0 +1,10 @@
+{
+  "name": "stackshift",
+  "version": "0.1.0",
+  "description": "Modernize legacy codebases, upgrade runtimes, migrate frameworks, and reduce technical debt",
+  "author": {
+    "name": "jsynowiec",
+    "url": "https://github.com/jsynowiec"
+  },
+  "license": "MIT"
+}
