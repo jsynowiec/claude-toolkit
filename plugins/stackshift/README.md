@@ -4,7 +4,34 @@ A Claude Code plugin for modernizing legacy codebases — upgrade runtimes, migr
 
 ## Agents
 
-- **modernization-engineer** — A pragmatic modernization engineer that handles runtime migrations, framework upgrades, dependency management, and technical debt reduction. Works incrementally, never breaking backward compatibility without explicit approval.
+- **modernization-engineer** — Orchestrates modernization workflows. Assesses the current state, plans upgrades, executes them incrementally, and verifies results. Delegates procedural work to specialized skills.
+- **dependency-impact-map** — Scans lockfiles, manifests, and import graphs to model the blast radius of dependency upgrades. Reports per-package impact scores, peer conflicts, and transitive dependency chains.
+
+## Skills
+
+| Skill | Purpose |
+|-------|---------|
+| **release-notes-retriever** | Fetches and distills upstream changelogs, deprecation notices, and migration guides for a specific version range |
+| **version-checker** | Identifies latest stable/LTS versions of runtimes and packages, detects EOL status, and recommends upgrade targets |
+| **api-delta-finder** | Compares API surfaces between versions to find removed, renamed, and behavior-changing APIs with severity classification |
+| **toolchain-discovery** | Auto-detects build, test, lint, type-check, and formatting tooling in a repository (monorepo-aware) |
+| **build-verifier** | Runs the build pipeline in standardized order, classifies failures, and diffs against a baseline to isolate regressions |
+| **test-gap-analyzer** | Maps upgraded components to test coverage and produces a per-file risk map |
+| **upgrade-plan-generator** | Synthesizes analysis findings into an ordered migration plan in standard Claude Code plan format |
+
+## Data Flow
+
+```
+version-checker ─────────────────────────────────────────────────────────┐
+                                                                        │
+release-notes-retriever ──> api-delta-finder ──┐                        │
+                                               │                        v
+dependency-impact-map ─────────────────────────┼──> test-gap-analyzer ──> upgrade-plan-generator
+                                               │
+toolchain-discovery ──> build-verifier ────────┘
+```
+
+The modernization-engineer agent orchestrates this flow, using judgment to decide which skills are needed and in what order.
 
 ## License
 
