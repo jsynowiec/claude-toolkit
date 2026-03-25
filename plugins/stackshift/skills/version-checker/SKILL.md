@@ -39,7 +39,7 @@ The patterns above cover JavaScript/TypeScript (Node.js, npm) and Python ecosyst
 
 ## Looking Up Latest Versions
 
-Use WebFetch against the endpoints documented in `known-endpoints.md` (located alongside this file). Parse the JSON responses to extract version data.
+Before making any web requests, call ToolSearch with query `select:WebFetch` to load the tool schema. Then use WebFetch against the endpoints documented in `known-endpoints.md` (located alongside this file). Parse the JSON responses to extract version data.
 
 ### Node.js runtime
 

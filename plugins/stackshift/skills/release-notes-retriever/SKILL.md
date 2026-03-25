@@ -9,6 +9,8 @@ Accept as input: package name, source repository URL (if known), current version
 
 ## Retrieval Strategy
 
+Before making any web requests, call ToolSearch with query `select:WebFetch` to load the tool schema.
+
 Try sources in this order. Stop as soon as you get structured, version-tagged content covering the requested range.
 
 ### 1. GitHub Releases API (preferred)
