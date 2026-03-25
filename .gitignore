@@ -3,7 +3,7 @@
 Thumbs.db
 
 # Claude Code local files
-.claude/
+.claude/**/*.local.*
 .worktrees/
 
 # Private journal (MCP tool data)
