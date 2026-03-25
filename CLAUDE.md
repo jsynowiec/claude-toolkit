@@ -17,3 +17,5 @@ New plugins must include:
 3. At least one component directory (agents/, skills/, commands/, or hooks/)
 4. Entry in top-level `.claude-plugin/marketplace.json`
 5. Entry in top-level `README.md` plugins table
+
+@.claude/CLAUDE.local.md
