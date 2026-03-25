@@ -1,6 +1,38 @@
 ---
 name: dependency-impact-map
-description: "Use this agent when you need to analyze the blast radius of a dependency upgrade by scanning lockfiles, manifests, and import graphs. Maps direct and transitive dependency relationships, identifies version constraints and peer conflicts, and scores upgrade impact.\n\nExamples:\n- \"What would break if we upgrade React from v17 to v18?\" — use this agent to trace the full dependency tree and blast radius.\n- \"Are there peer dependency conflicts blocking this upgrade?\" — use this agent to parse lockfiles and identify conflicts.\n- \"Which source files import webpack directly?\" — use this agent to trace the import graph."
+description: |
+  Use this agent to analyze the blast radius of a dependency upgrade by scanning lockfiles, manifests, and import graphs. Maps direct and transitive dependency relationships, identifies version constraints and peer conflicts, and scores upgrade impact.
+
+  <example>
+  Context: User asks what would be affected by a specific package upgrade.
+  user: "What would break if we upgrade React from v17 to v18?"
+  <commentary>
+  Direct blast radius question — this agent traces the full dependency tree and import graph to produce a quantified impact report.
+  </commentary>
+  </example>
+
+  <example>
+  Context: User is blocked by dependency conflicts during an upgrade.
+  user: "Are there peer dependency conflicts blocking this upgrade?"
+  <commentary>
+  Conflict detection requires parsing lockfiles and mapping peer dependency constraints — this agent's core capability.
+  </commentary>
+  </example>
+
+  <example>
+  Context: The modernization-engineer agent is planning an upgrade and needs a blast radius report before generating the migration plan.
+  <commentary>
+  Proactive trigger: before any major upgrade, this agent should be dispatched to quantify risk and surface conflicts.
+  </commentary>
+  </example>
+
+  <example>
+  Context: User asks which files depend on a specific package without naming the analysis method.
+  user: "How widely is lodash used in this codebase?"
+  <commentary>
+  Implicit trigger: the user wants import graph data. This agent traces usages across source files and reports counts and paths.
+  </commentary>
+  </example>
 model: sonnet
 memory: user
 disallowedTools: Write, Edit, NotebookEdit

@@ -2,14 +2,14 @@
 name: upgrade-plan-generator
 description: Use when you have completed analysis (version checks, API deltas, impact mapping, test gaps) and need to synthesize findings into an ordered, step-by-step migration plan that can be executed incrementally with verification at each step.
 user-invocable: false
-allowed-tools: Read
+allowed-tools: Read, Glob, Grep
 ---
 
-Synthesize analysis outputs into a structured, dependency-aware migration plan. The plan must be executable by agents following the superpowers:executing-plans or superpowers:subagent-driven-development workflows.
+Synthesize analysis outputs into a structured, dependency-aware migration plan.
 
 **REQUIRED INPUT:** Output from stackshift:version-checker, stackshift:api-delta-finder, the dependency-impact-map agent, and stackshift:test-gap-analyzer.
 
-**OUTPUT COMPATIBLE WITH:** superpowers:executing-plans and superpowers:subagent-driven-development
+**OUTPUT COMPATIBLE WITH:** superpowers:executing-plans and superpowers:subagent-driven-development (optional — if neither is installed, the plan is still usable as a structured reference)
 
 ## Gathering Inputs
 

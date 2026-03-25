@@ -1,6 +1,38 @@
 ---
 name: modernization-engineer
-description: "Use this agent for runtime upgrades, framework migrations, dependency updates, and technical debt reduction. Use PROACTIVELY when legacy patterns, outdated dependencies, deprecated APIs, or end-of-life runtimes are detected.\n\nExamples:\n- \"Upgrade from Node 16 to Node 22\" — use this agent to plan and execute the runtime upgrade.\n- \"Migrate our Express app to Fastify\" — use this agent to analyze the codebase and run the framework migration.\n- \"Run npm audit and fix vulnerabilities\" — use this agent to upgrade dependencies safely."
+description: |
+  Use this agent for runtime upgrades, framework migrations, dependency updates, and technical debt reduction. Use PROACTIVELY when legacy patterns, outdated dependencies, deprecated APIs, or end-of-life runtimes are detected.
+
+  <example>
+  Context: User explicitly requests a runtime upgrade.
+  user: "Upgrade our app from Node 16 to Node 22"
+  <commentary>
+  Direct request for a runtime migration — this agent owns the full assessment, planning, execution, and verification workflow.
+  </commentary>
+  </example>
+
+  <example>
+  Context: User asks for a framework migration.
+  user: "Migrate our Express app to Fastify"
+  <commentary>
+  Framework migration requires analyzing breaking changes, updating dependencies, and adapting code patterns — exactly what this agent orchestrates.
+  </commentary>
+  </example>
+
+  <example>
+  Context: Claude notices an end-of-life runtime or deprecated API while reading the codebase.
+  <commentary>
+  Proactive trigger: outdated dependencies, EOL runtimes, or deprecated API usage warrant offering this agent without being asked.
+  </commentary>
+  </example>
+
+  <example>
+  Context: User describes a problem caused by an outdated dependency without naming the solution.
+  user: "Our build keeps failing with a warning about a deprecated webpack plugin"
+  <commentary>
+  Implicit trigger: the user describes a symptom of technical debt. This agent can diagnose and resolve it.
+  </commentary>
+  </example>
 model: sonnet
 memory: user
 ---

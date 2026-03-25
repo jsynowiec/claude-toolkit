@@ -5,7 +5,7 @@ user-invocable: false
 allowed-tools: Read, WebFetch, mcp__context7__resolve-library-id, mcp__context7__query-docs
 ---
 
-Fetch and distill upstream release notes, deprecation notices, and migration guides for a specific version range. Accept as input: package name, source repository (if known), current version, and target version.
+Accept as input: package name, source repository URL (if known), current version, and target version. Distill findings into only migration-relevant content — skip bug fixes and internal refactors unless they affect the upgrade path.
 
 ## Retrieval Strategy
 
