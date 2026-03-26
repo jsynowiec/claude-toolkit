@@ -1,6 +1,6 @@
 ---
 name: version-checker
-description: This skill should be used when the caller needs to determine the latest stable or LTS versions of runtimes (Node.js, Python) or packages (npm, PyPI), check if current project versions are outdated or end-of-life, or identify upgrade paths from local versions to recommended targets.
+description: Determines latest stable or LTS versions of runtimes (Node.js, Python) and packages (npm, PyPI), checks EOL status, and identifies upgrade paths. Use when checking if project versions are outdated or need upgrading.
 user-invocable: false
 allowed-tools: Read, Glob, Bash, WebFetch
 ---

@@ -6,6 +6,7 @@ description: |
   <example>
   Context: User explicitly requests a runtime upgrade.
   user: "Upgrade our app from Node 16 to Node 22"
+  assistant: "I'll use the modernization-engineer agent to plan and execute the Node 16 to 22 upgrade."
   <commentary>
   Direct request for a runtime migration — this agent owns the full assessment, planning, execution, and verification workflow.
   </commentary>
@@ -14,6 +15,7 @@ description: |
   <example>
   Context: User asks for a framework migration.
   user: "Migrate our Express app to Fastify"
+  assistant: "I'll use the modernization-engineer agent to analyze the breaking changes and orchestrate the Express to Fastify migration."
   <commentary>
   Framework migration requires analyzing breaking changes, updating dependencies, and adapting code patterns — exactly what this agent orchestrates.
   </commentary>
@@ -29,11 +31,13 @@ description: |
   <example>
   Context: User describes a problem caused by an outdated dependency without naming the solution.
   user: "Our build keeps failing with a warning about a deprecated webpack plugin"
+  assistant: "I'll use the modernization-engineer agent to diagnose and resolve the deprecated webpack plugin issue."
   <commentary>
   Implicit trigger: the user describes a symptom of technical debt. This agent can diagnose and resolve it.
   </commentary>
   </example>
 model: sonnet
+color: green
 memory: user
 skills:
   - stackshift:version-checker

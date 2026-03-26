@@ -6,6 +6,7 @@ description: |
   <example>
   Context: User asks what would be affected by a specific package upgrade.
   user: "What would break if we upgrade React from v17 to v18?"
+  assistant: "I'll use the dependency-impact-map agent to trace the full dependency tree and import graph and produce an impact report."
   <commentary>
   Direct blast radius question — this agent traces the full dependency tree and import graph to produce a quantified impact report.
   </commentary>
@@ -14,6 +15,7 @@ description: |
   <example>
   Context: User is blocked by dependency conflicts during an upgrade.
   user: "Are there peer dependency conflicts blocking this upgrade?"
+  assistant: "I'll use the dependency-impact-map agent to parse lockfiles and map peer dependency constraints."
   <commentary>
   Conflict detection requires parsing lockfiles and mapping peer dependency constraints — this agent's core capability.
   </commentary>
@@ -29,11 +31,13 @@ description: |
   <example>
   Context: User asks which files depend on a specific package without naming the analysis method.
   user: "How widely is lodash used in this codebase?"
+  assistant: "I'll use the dependency-impact-map agent to trace lodash usages across source files."
   <commentary>
   Implicit trigger: the user wants import graph data. This agent traces usages across source files and reports counts and paths.
   </commentary>
   </example>
 model: sonnet
+color: cyan
 memory: user
 disallowedTools: Write, Edit, NotebookEdit
 ---

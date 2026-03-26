@@ -1,6 +1,6 @@
 ---
 name: test-gap-analyzer
-description: Use when planning an upgrade or migration to identify which affected components lack test coverage, helping prioritize where to focus attention and flag risky untested paths before making changes.
+description: Identifies which upgrade-affected components lack test coverage and scores risk by crossing change severity with coverage level. Use when planning an upgrade to flag risky untested paths before making changes.
 user-invocable: false
 allowed-tools: Read, Glob, Grep
 ---

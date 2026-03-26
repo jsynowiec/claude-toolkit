@@ -29,6 +29,8 @@ These are NOT opposites — a skill with neither set can be invoked by both.
 
 ## Description
 
+**Voice:** Follow the official docs pattern — lead with what the skill does, then `"Use when [condition]"`. No second-person ("you need to"). Example: `"Fetches upstream release notes and changelogs. Use when analyzing API changes or planning upgrades."`
+
 **Avoid overlap:** Trigger phrases that match multiple skills in the same plugin cause ambiguous triggering. Pick phrases specific to this skill's scope.
 
 **Self-contained:** A session that hasn't invoked the skill sees only the description. It must be sufficient on its own to trigger correctly.

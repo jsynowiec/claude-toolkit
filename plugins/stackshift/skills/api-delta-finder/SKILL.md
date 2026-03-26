@@ -1,6 +1,6 @@
 ---
 name: api-delta-finder
-description: Use when moving between major framework, library, or runtime versions to identify removed, renamed, or behavior-changing APIs. Use after fetching release notes to analyze the actual API surface changes and classify their risk.
+description: Identifies removed, renamed, and behavior-changing APIs between major versions of frameworks, libraries, or runtimes. Use after fetching release notes to classify API surface changes and their risk.
 user-invocable: false
 allowed-tools: Read, Glob, Grep, Bash
 ---

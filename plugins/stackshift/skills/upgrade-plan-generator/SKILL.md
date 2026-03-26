@@ -1,6 +1,6 @@
 ---
 name: upgrade-plan-generator
-description: Use when you have completed analysis (version checks, API deltas, impact mapping, test gaps) and need to synthesize findings into an ordered, step-by-step migration plan that can be executed incrementally with verification at each step.
+description: Synthesizes analysis findings (version checks, API deltas, impact mapping, test gaps) into an ordered, step-by-step migration plan with verification at each step. Use when analysis is complete and an executable upgrade plan is needed.
 user-invocable: false
 allowed-tools: Read, Glob, Grep
 ---
