@@ -1,8 +1,8 @@
 ---
 name: version-checker
-description: Use when you need to determine the latest stable or LTS versions of runtimes (Node.js, Python) or packages (npm, PyPI), check if current project versions are outdated or end-of-life, or identify upgrade paths from local versions to recommended targets.
+description: This skill should be used when the caller needs to determine the latest stable or LTS versions of runtimes (Node.js, Python) or packages (npm, PyPI), check if current project versions are outdated or end-of-life, or identify upgrade paths from local versions to recommended targets.
 user-invocable: false
-allowed-tools: Read, Glob, WebFetch
+allowed-tools: Read, Glob, Bash, WebFetch
 ---
 
 Check only the runtimes or packages the caller asks about. Do not scan all dependencies unprompted.
@@ -39,32 +39,32 @@ The patterns above cover JavaScript/TypeScript (Node.js, npm) and Python ecosyst
 
 ## Looking Up Latest Versions
 
-Before making any web requests, call ToolSearch with query `select:WebFetch` to load the tool schema. Then use WebFetch against the endpoints documented in `known-endpoints.md` (located alongside this file). Parse the JSON responses to extract version data.
+Run `scripts/fetch-version.sh` (located in this skill's directory) via Bash. It fetches registry APIs using curl and jq, returning only the needed fields as `key=value` lines.
 
 ### Node.js runtime
 
-1. Fetch the Node.js release index.
-2. Identify the latest LTS release: first entry where `lts` is a non-false string.
-3. Identify the latest Current release: the very first entry in the array.
-4. Determine EOL status by checking the endoflife.date API for Node.js or by comparing against the known LTS schedule.
+1. Run `scripts/fetch-version.sh nodejs-releases` — returns `latest_current`, `latest_current_date`, `latest_lts`, `latest_lts_codename`, `latest_lts_date`.
+2. Run `scripts/fetch-version.sh nodejs-eol` — returns `---`-separated records with `cycle`, `eol`, `lts`, `latest`.
 
 ### Python runtime
 
-1. Fetch the endoflife.date Python endpoint for a concise view of all releases with EOL dates.
-2. Latest stable: the highest version where `eol` date is in the future.
-3. EOL status: compare the project's Python version against the `eol` field.
+1. Run `scripts/fetch-version.sh python-eol` — returns `---`-separated records with `cycle`, `eol`, `latest`.
 
 ### npm packages
 
-1. Fetch the registry endpoint for the specific package.
-2. `dist-tags.latest` gives the latest published version.
-3. Check `time` object for release dates if age matters.
+1. Run `scripts/fetch-version.sh npm <package>` — returns `latest`.
 
 ### PyPI packages
 
-1. Fetch the PyPI JSON endpoint for the specific package.
-2. `info.version` gives the latest stable version.
-3. Filter out pre-releases by ignoring versions containing `a`, `b`, `rc`, or `dev` suffixes in `releases` keys.
+1. Run `scripts/fetch-version.sh pypi <package>` — returns `latest`, `requires_python`.
+
+### Fallback
+
+If any script invocation outputs a line starting with `error:`, fall back to direct fetching:
+
+1. Call ToolSearch with query `select:WebFetch` to load the tool schema.
+2. Read `references/known-endpoints.md` for the endpoint URL and response schema.
+3. Use WebFetch to fetch the endpoint and extract the needed fields from the JSON response.
 
 ## Assessing EOL Status
 

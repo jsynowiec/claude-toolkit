@@ -2,6 +2,10 @@
 
 A Claude Code plugin for modernizing legacy codebases — upgrade runtimes, migrate frameworks, manage dependencies, and reduce technical debt.
 
+## Requirements
+
+- [jq](https://jqlang.github.io/jq/) — used by the version-checker skill for efficient JSON parsing. The skill falls back to direct fetching if jq is unavailable, but performance is significantly better with it installed. Install with `brew install jq` (macOS) or `apt-get install jq` (Linux).
+
 ## Agents
 
 - **modernization-engineer** — Orchestrates modernization workflows. Assesses the current state, plans upgrades, executes them incrementally, and verifies results. Delegates procedural work to specialized skills.
