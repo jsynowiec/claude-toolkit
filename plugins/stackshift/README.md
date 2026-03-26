@@ -4,7 +4,7 @@ A Claude Code plugin for modernizing legacy codebases — upgrade runtimes, migr
 
 ## Requirements
 
-- [jq](https://jqlang.github.io/jq/) — used by the version-checker skill for efficient JSON parsing. The skill falls back to direct fetching if jq is unavailable, but performance is significantly better with it installed. Install with `brew install jq` (macOS) or `apt-get install jq` (Linux).
+- [jq](https://jqlang.github.io/jq/) — used by the version-checker and release-notes-retriever skills for efficient JSON parsing. The skills fall back to direct fetching if jq is unavailable, but performance is significantly better with it installed. Install with `brew install jq` (macOS) or `apt-get install jq` (Linux).
 
 ## Agents
 
