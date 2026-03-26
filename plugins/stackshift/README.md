@@ -2,6 +2,10 @@
 
 A Claude Code plugin for modernizing legacy codebases — upgrade runtimes, migrate frameworks, manage dependencies, and reduce technical debt.
 
+## Language & Runtime Support
+
+stackshift was designed and tested primarily with **Node.js** (JavaScript/TypeScript/npm/yarn/pnpm) and **Python** (pip/PyPI/uv) projects in mind. It should work with other languages and runtimes — Go, Rust, Java, Ruby, and others — but the agents and skills are optimized for the ecosystems above, so results may be less precise or require more manual guidance outside of them.
+
 ## Requirements
 
 - [jq](https://jqlang.github.io/jq/) — used by the version-checker and release-notes-retriever skills for efficient JSON parsing. The skills fall back to direct fetching if jq is unavailable, but performance is significantly better with it installed. Install with `brew install jq` (macOS) or `apt-get install jq` (Linux).
