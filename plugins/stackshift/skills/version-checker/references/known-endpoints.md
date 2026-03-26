@@ -74,14 +74,16 @@ Preferred for version checks. Concise and consistent format.
     "releaseDate": "2023-10-02",
     "eol": "2028-10-02",
     "latest": "3.12.5",
-    "lts": false
+    "lts": false,
+    "support": "2025-04-02"
   },
   {
     "cycle": "3.8",
     "releaseDate": "2019-10-14",
     "eol": "2024-10-07",
     "latest": "3.8.20",
-    "lts": false
+    "lts": false,
+    "support": "2021-05-03"
   }
 ]
 ```
@@ -89,10 +91,11 @@ Preferred for version checks. Concise and consistent format.
 **Key fields:**
 
 - `cycle` — minor version series (e.g., `3.12`)
-- `eol` — end-of-life date
+- `eol` — end-of-life date (end of all support, including security fixes)
+- `support` — end of active bugfix support; after this only security fixes are provided until `eol`
 - `latest` — latest patch release in this series
 
-**Extract:** Highest `cycle` where `eol` is in the future = latest stable series. Compare project version's `cycle` against `eol` for EOL status.
+**Extract:** Highest `cycle` where `eol` is in the future = latest stable series. Compare project version's `cycle` against `eol` for EOL status. Cycles where `support` is still in the future are in active bugfix phase; the two highest such cycles are the "current" and "stable" Python versions (equivalent to Node.js Current and LTS).
 
 **Alternate URL:** `https://www.python.org/api/v2/downloads/release/`
 

@@ -33,13 +33,36 @@ case "$CMD" in
 
   nodejs-eol)
     fetch_json "https://endoflife.date/api/nodejs.json" \
-      | jq -r 2>/dev/null '.[] | "cycle=\(.cycle)\neol=\(.eol)\nlts=\(.lts)\nlatest=\(.latest)\n---"' \
+      | jq -r --argjson all "$( [ "${2:-}" = "--all" ] && echo true || echo false )" 2>/dev/null '
+          def is_supported:
+            (.eol == false) or ((.eol | type) == "string" and .eol > (now | strftime("%Y-%m-%d")));
+          .[] | select($all or is_supported)
+          | "cycle=\(.cycle)\neol=\(.eol)\nlts=\(.lts)\nlatest=\(.latest)\n---"
+        ' \
       || { echo "error: unexpected response from https://endoflife.date/api/nodejs.json"; exit 1; }
+    ;;
+
+  python-releases)
+    fetch_json "https://endoflife.date/api/python.json" \
+      | jq -r 2>/dev/null '
+          (now | strftime("%Y-%m-%d")) as $today
+          | [.[] | select(
+              (.support == false) or ((.support | type) == "string" and .support > $today)
+            )]
+          | (.[0] | "latest_current=\(.latest)"),
+            (.[1] | "latest_lts=\(.latest)")
+        ' \
+      || { echo "error: unexpected response from https://endoflife.date/api/python.json"; exit 1; }
     ;;
 
   python-eol)
     fetch_json "https://endoflife.date/api/python.json" \
-      | jq -r 2>/dev/null '.[] | "cycle=\(.cycle)\neol=\(.eol)\nlatest=\(.latest)\n---"' \
+      | jq -r --argjson all "$( [ "${2:-}" = "--all" ] && echo true || echo false )" 2>/dev/null '
+          def is_supported:
+            (.eol == false) or ((.eol | type) == "string" and .eol > (now | strftime("%Y-%m-%d")));
+          .[] | select($all or is_supported)
+          | "cycle=\(.cycle)\neol=\(.eol)\nlatest=\(.latest)\n---"
+        ' \
       || { echo "error: unexpected response from https://endoflife.date/api/python.json"; exit 1; }
     ;;
 
@@ -70,11 +93,12 @@ case "$CMD" in
     echo "usage: fetch-version.sh <subcommand> [args]"
     echo ""
     echo "subcommands:"
-    echo "  nodejs-releases      Latest Node.js Current and LTS versions"
-    echo "  nodejs-eol           Node.js release cycle EOL dates"
-    echo "  python-eol           Python release cycle EOL dates"
-    echo "  npm <package>        Latest npm package version"
-    echo "  pypi <package>       Latest PyPI package version"
+    echo "  nodejs-releases          Latest Node.js Current and LTS versions"
+    echo "  nodejs-eol [--all]       Node.js release cycle EOL dates (default: supported only)"
+    echo "  python-releases          Latest Python current and stable versions"
+    echo "  python-eol [--all]       Python release cycle EOL dates (default: supported only)"
+    echo "  npm <package>            Latest npm package version"
+    echo "  pypi <package>           Latest PyPI package version"
     exit 1
     ;;
 esac

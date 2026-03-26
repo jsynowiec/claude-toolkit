@@ -41,14 +41,17 @@ The patterns above cover JavaScript/TypeScript (Node.js, npm) and Python ecosyst
 
 Run `scripts/fetch-version.sh` (located in this skill's directory) via Bash. It fetches registry APIs using curl and jq, returning only the needed fields as `key=value` lines.
 
+The `nodejs-eol` and `python-eol` subcommands default to supported versions only. Use this default — it keeps output concise. Pass `--all` only when historical or already-EOL'd version data is explicitly needed.
+
 ### Node.js runtime
 
 1. Run `scripts/fetch-version.sh nodejs-releases` — returns `latest_current`, `latest_current_date`, `latest_lts`, `latest_lts_codename`, `latest_lts_date`.
-2. Run `scripts/fetch-version.sh nodejs-eol` — returns `---`-separated records with `cycle`, `eol`, `lts`, `latest`.
+2. Run `scripts/fetch-version.sh nodejs-eol` — returns `---`-separated records with `cycle`, `eol`, `lts`, `latest` for currently-supported versions only. Add `--all` for the full historical list.
 
 ### Python runtime
 
-1. Run `scripts/fetch-version.sh python-eol` — returns `---`-separated records with `cycle`, `eol`, `latest`.
+1. Run `scripts/fetch-version.sh python-releases` — returns `latest_current` (newest bugfix-active version, e.g. 3.14.x) and `latest_lts` (second-newest bugfix-active version, e.g. 3.13.x).
+2. Run `scripts/fetch-version.sh python-eol` — returns `---`-separated records with `cycle`, `eol`, `latest` for currently-supported versions only. Add `--all` for the full historical list.
 
 ### npm packages
 
