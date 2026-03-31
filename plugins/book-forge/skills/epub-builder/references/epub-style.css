@@ -247,6 +247,24 @@ small {
     font-size: 0.85em;
 }
 
+/* ── Table of Contents ────────────────────────────────────────────────── */
+/* When --number-sections is used, pandoc embeds section numbers (1.2.3)  */
+/* into the heading text. The TOC is rendered as <ol> inside <nav>, so    */
+/* e-readers show both the <ol> list markers AND the section numbers.     */
+/* Suppress the list markers to avoid the duplication.                     */
+nav#toc ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+nav#toc ol ol {
+    padding-left: 1.4em;
+}
+
+nav#toc li {
+    margin-bottom: 0.3em;
+}
+
 /* ── Title page ───────────────────────────────────────────────────────── */
 section.titlepage {
     text-align: center;

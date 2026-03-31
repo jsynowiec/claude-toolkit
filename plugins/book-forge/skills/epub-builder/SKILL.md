@@ -118,3 +118,4 @@ Use `references/epub-style.css` as the production-ready stylesheet. Copy it into
 - Every source file must start with H1. If one does not, prepend a title from toc.json using `ensure_h1`.
 - Never skip heading levels (H1 directly to H3). Shift headings based on `depth` in toc.json.
 - Copy `references/epub-style.css` into the project directory rather than referencing the plugin path. The built epub must be self-contained.
+- When using `--number-sections` with `--toc`, the reference stylesheet suppresses `<ol>` list markers in `nav#toc` to prevent double numbering. If using a custom stylesheet, it must include `nav#toc ol { list-style-type: none; }` or the TOC will show both list markers and section numbers.

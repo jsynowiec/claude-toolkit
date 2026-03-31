@@ -376,6 +376,17 @@ pass all metadata via `--metadata` flags instead of embedding it as YAML in the 
 
 ## Gotchas and How to Fix Them
 
+### Double numbering in TOC
+
+When `--number-sections` and `--toc` are used together, the TOC shows duplicate numbering:
+e-readers render the `<ol>` list markers (1., 2., 3.) alongside the section numbers already
+embedded in the heading text (2.3, 2.4, etc.), producing entries like "3. 2.3 Elements of a
+Prompt".
+
+**Fix:** The reference stylesheet (`@epub-style.css`) suppresses `<ol>` list markers inside
+`nav#toc` with `list-style-type: none`. If you use a custom stylesheet, add the same rule.
+Without it, every TOC entry shows two sets of numbers.
+
 ### Double-processing of image paths
 
 If your pipeline converts format-specific image syntax into standard Markdown before
