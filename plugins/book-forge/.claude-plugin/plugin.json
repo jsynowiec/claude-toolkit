@@ -1,0 +1,10 @@
+{
+  "name": "book-forge",
+  "version": "0.1.0",
+  "description": "Build professionally structured ePub 3 e-books from Markdown sources using pandoc",
+  "author": {
+    "name": "jsynowiec",
+    "url": "https://github.com/jsynowiec"
+  },
+  "license": "MIT"
+}

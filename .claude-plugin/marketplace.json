@@ -19,6 +19,17 @@
         "url": "https://github.com/jsynowiec"
       },
       "category": "development"
+    },
+    {
+      "name": "book-forge",
+      "source": "./plugins/book-forge",
+      "description": "Build professionally structured ePub 3 e-books from Markdown sources using pandoc",
+      "version": "0.1.0",
+      "owner": {
+        "name": "jsynowiec",
+        "url": "https://github.com/jsynowiec"
+      },
+      "category": "authoring"
     }
   ]
 }
