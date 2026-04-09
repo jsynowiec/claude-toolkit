@@ -13,7 +13,7 @@ fi
 fetch_json() {
   local url="$1"
   shift
-  curl -fsSL --max-time 15 "$@" "$url" 2>/dev/null || {
+  curl -fsSL --proto =https --max-redirs 3 --max-time 15 "$@" "$url" 2>/dev/null || {
     echo "error: failed to fetch $url"
     exit 1
   }
