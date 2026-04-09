@@ -1,6 +1,6 @@
 ---
 name: version-checker
-description: Determines latest stable or LTS versions of runtimes (Node.js, Python) and packages (npm, PyPI), checks EOL status, and identifies upgrade paths. Use when checking if project versions are outdated or need upgrading.
+description: Determines latest stable or LTS versions of runtimes (Node.js, Python) and packages (npm, PyPI), checks EOL status, identifies upgrade paths, and looks up the VS Code compatibility matrix. Use when checking if project versions are outdated, need upgrading, or determining minimum VS Code engine version after a runtime change.
 user-invocable: false
 allowed-tools: Read, Glob, Bash, WebFetch
 ---
@@ -33,9 +33,13 @@ Inspect only the files relevant to the requested check:
 - `pyproject.toml` — `project.dependencies` and `project.optional-dependencies`
 - `requirements.txt` / `requirements-*.txt` — pinned or ranged versions
 
+### VS Code extension engine
+
+- `package.json` — `engines.vscode` field (semver range, e.g., `^1.96.0`)
+
 If multiple sources conflict, report the discrepancy.
 
-The patterns above cover JavaScript/TypeScript (Node.js, npm) and Python ecosystems. For other runtimes or package registries, apply the same approach: check local version files and query the ecosystem's machine-readable registry endpoint following the same patterns shown here.
+The patterns above cover JavaScript/TypeScript (Node.js, npm), Python, and VS Code extension ecosystems. For other runtimes or package registries, apply the same approach: check local version files and query the ecosystem's machine-readable registry endpoint following the same patterns shown here.
 
 ## Looking Up Latest Versions
 
@@ -60,6 +64,12 @@ The `nodejs-eol` and `python-eol` subcommands default to supported versions only
 ### PyPI packages
 
 1. Run `scripts/fetch-version.sh pypi <package>` — returns `latest`, `requires_python`.
+
+### VS Code compatibility matrix
+
+1. Run `scripts/fetch-version.sh vscode-compat <component> <version>` — where `<component>` is `node`, `electron`, or `chromium` and `<version>` is a major (`22`) or major.minor (`22.16`), optionally `v`-prefixed. Returns `oldest_vscode` (the first VS Code release bundling that version), `oldest_vscode_<component>` (the exact component version in that release), `oldest_vscode_created_at`, and `newest_vscode` (the latest VS Code release still on that version).
+
+Use this when modernizing VS Code extensions to determine the minimum `engines.vscode` value required after upgrading a bundled runtime. For example, after upgrading from Node 20 to Node 22, run `vscode-compat node 22` to find the oldest VS Code version that ships Node 22.x.
 
 ### Fallback
 

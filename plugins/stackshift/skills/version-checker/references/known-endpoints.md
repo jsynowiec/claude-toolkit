@@ -160,3 +160,49 @@ Replace `{package}` with the package name (e.g., `flask`, `django`).
 - `releases` — all published versions (keys are version strings)
 
 **Extract:** `info.version` for latest stable. To filter pre-releases from `releases`, skip keys containing `a`, `b`, `rc`, or `.dev`.
+
+## VS Code Compatibility Matrix
+
+**URL:** `https://raw.githubusercontent.com/ewanharris/vscode-versions/main/versions.json`
+
+Returns a JSON array of VS Code releases with bundled component versions, sorted newest-first.
+
+```json
+[
+  {
+    "version": "1.115.0",
+    "chromium": "142.0.7444.265",
+    "electron": "39.8.5",
+    "node": "22.22.1",
+    "name": "1.115.0",
+    "created_at": "2026-04-07T22:04:57Z"
+  },
+  {
+    "version": "1.101.0",
+    "chromium": "136.0.7103.100",
+    "electron": "36.4.0",
+    "node": "22.15.1",
+    "name": "June 2025",
+    "created_at": "2025-06-11T13:47:56Z"
+  },
+  {
+    "version": "1.96.0",
+    "chromium": "132.0.6834.83",
+    "electron": "34.0.0",
+    "node": "20.18.1",
+    "name": "November 2024",
+    "created_at": "2024-12-04T15:40:46Z"
+  }
+]
+```
+
+**Key fields:**
+
+- `version` — VS Code release version (e.g., `1.115.0`)
+- `node` — bundled Node.js version
+- `electron` — bundled Electron version
+- `chromium` — bundled Chromium version
+- `name` — release display name (monthly label or version string)
+- `created_at` — release timestamp (ISO 8601)
+
+**Extract:** To find the oldest VS Code version bundling a specific major version of a component, filter entries where the component's value starts with `<major>.`, then take the last entry (array is newest-first). For major.minor matching, filter where the component's value starts with `<major>.<minor>.`.

@@ -89,6 +89,45 @@ case "$CMD" in
       || { echo "error: unexpected response from https://pypi.org/pypi/$PKG/json"; exit 1; }
     ;;
 
+  vscode-compat)
+    COMPONENT="${2:-}"
+    VERSION="${3:-}"
+    if [ -z "$COMPONENT" ] || [ -z "$VERSION" ]; then
+      echo "error: vscode-compat requires a component and version (e.g., fetch-version.sh vscode-compat node 22)"
+      exit 1
+    fi
+    case "$COMPONENT" in
+      node|electron|chromium) ;;
+      *)
+        echo "error: unknown component \"$COMPONENT\" — must be one of: node, electron, chromium"
+        exit 1
+        ;;
+    esac
+    VERSION="${VERSION#v}"
+    VSCODE_URL="https://raw.githubusercontent.com/ewanharris/vscode-versions/main/versions.json"
+    OUTPUT=$(fetch_json "$VSCODE_URL" \
+      | jq -r --arg component "$COMPONENT" --arg version "$VERSION" 2>/dev/null '
+          ($version | split(".") | length) as $depth
+          | [.[] | select(
+              .[$component] | split(".")[0:$depth] | join(".")
+              | . == $version
+            )]
+          | if length == 0 then empty
+            else
+              "oldest_vscode=\(.[-1].version)",
+              "oldest_vscode_\($component)=\(.[-1][$component])",
+              "oldest_vscode_created_at=\(.[-1].created_at)",
+              "newest_vscode=\(.[0].version)"
+            end
+        ') \
+      || { echo "error: unexpected response from $VSCODE_URL"; exit 1; }
+    if [ -z "$OUTPUT" ]; then
+      echo "error: no VS Code version found bundling $COMPONENT ${VERSION}.x"
+      exit 1
+    fi
+    echo "$OUTPUT"
+    ;;
+
   *)
     echo "usage: fetch-version.sh <subcommand> [args]"
     echo ""
@@ -99,6 +138,7 @@ case "$CMD" in
     echo "  python-eol [--all]       Python release cycle EOL dates (default: supported only)"
     echo "  npm <package>            Latest npm package version"
     echo "  pypi <package>           Latest PyPI package version"
+    echo "  vscode-compat <c> <ver>  Oldest VS Code version bundling a component version"
     exit 1
     ;;
 esac
