@@ -1,6 +1,6 @@
 {
   "name": "stackshift",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Modernize legacy codebases, upgrade runtimes, migrate frameworks, and reduce technical debt",
   "author": {
     "name": "jsynowiec",
