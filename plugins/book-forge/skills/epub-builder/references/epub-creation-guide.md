@@ -47,8 +47,8 @@ minimum:
 --metadata=title:"Book Title"
 --metadata=author:"Author Name"
 --metadata=lang:en
---metadata=date:2025
---metadata=rights:"© 2025 Author. Licensed under CC BY 4.0."
+--metadata=date:2026
+--metadata=rights:"© 2026 Author. Licensed under CC BY 4.0."
 ```
 
 Optional but recommended:
@@ -68,13 +68,13 @@ from heading levels. This is the single most important thing to get right.
 **Rule: one H1 per chapter, subchapters at H2, subsections at H3.**
 
 ```markdown
-# Introduction                    ← Chapter (H1)
+# Introduction ← Chapter (H1)
 
-## LLM Settings                   ← Subchapter (H2)
+## LLM Settings ← Subchapter (H2)
 
-### Temperature                   ← Subsection (H3)
+### Temperature ← Subsection (H3)
 
-## Basics of Prompting            ← Subchapter (H2)
+## Basics of Prompting ← Subchapter (H2)
 ```
 
 **Never skip heading levels.** H1 → H3 (skipping H2) breaks TOC nesting in most readers
@@ -126,11 +126,11 @@ navigation granularity on e-readers.
 --split-level=2    # Split at H1 and H2 (each subchapter = separate file)
 ```
 
-| `--split-level` | Behaviour | Best for |
-|---|---|---|
-| `1` (default) | Split at H1 only | Books with few, large chapters |
-| `2` | Split at H1 and H2 | Technical books with many sections |
-| `3` | Split at H1–H3 | Reference manuals |
+| `--split-level` | Behaviour          | Best for                           |
+| --------------- | ------------------ | ---------------------------------- |
+| `1` (default)   | Split at H1 only   | Books with few, large chapters     |
+| `2`             | Split at H1 and H2 | Technical books with many sections |
+| `3`             | Split at H1–H3     | Reference manuals                  |
 
 > **Note:** `--epub-chapter-level` is the old name, deprecated in pandoc 3.0.
 > Use `--split-level` instead.
@@ -352,7 +352,7 @@ pandoc combined.md \
 
 **Flags explained:**
 
-- `--from=markdown-yaml_metadata_block` — the minus sign *disables* the
+- `--from=markdown-yaml_metadata_block` — the minus sign _disables_ the
   `yaml_metadata_block` extension. See the YAML gotcha below for why this is essential.
   The `raw_html` extension (passing HTML blocks through to output) is already enabled by
   default for Markdown and ePub — you don't need to add `+raw_html` explicitly, but it
@@ -362,7 +362,7 @@ pandoc combined.md \
 
 ### The YAML `---` Gotcha
 
-Pandoc's `yaml_metadata_block` extension treats `---` *anywhere in the document* as a
+Pandoc's `yaml_metadata_block` extension treats `---` _anywhere in the document_ as a
 YAML metadata block delimiter — not just at the top. A horizontal rule (`---`) somewhere
 in your content will trigger a cryptic parse error:
 
@@ -475,11 +475,11 @@ Create a JSON file listing all source files in reading order:
 
 ```json
 [
-    {"title": "Introduction",     "file": "intro.md",          "depth": 0},
-    {"title": "Getting Started",  "file": "ch1/start.md",      "depth": 1},
-    {"title": "Configuration",    "file": "ch1/config.md",     "depth": 1},
-    {"title": "Advanced Topics",  "file": "advanced.md",       "depth": 0},
-    {"title": "Caching",          "file": "adv/caching.md",    "depth": 1}
+  { "title": "Introduction", "file": "intro.md", "depth": 0 },
+  { "title": "Getting Started", "file": "ch1/start.md", "depth": 1 },
+  { "title": "Configuration", "file": "ch1/config.md", "depth": 1 },
+  { "title": "Advanced Topics", "file": "advanced.md", "depth": 0 },
+  { "title": "Caching", "file": "adv/caching.md", "depth": 1 }
 ]
 ```
 
@@ -489,10 +489,10 @@ becomes H2), `2` = sub-subchapter (H1 becomes H3).
 Example heading shifts:
 
 | Source heading | depth=0 | depth=1 | depth=2 |
-|---|---|---|---|
-| H1 | H1 | H2 | H3 |
-| H2 | H2 | H3 | H4 |
-| H3 | H3 | H4 | H5 |
+| -------------- | ------- | ------- | ------- |
+| H1             | H1      | H2      | H3      |
+| H2             | H2      | H3      | H4      |
+| H3             | H3      | H4      | H5      |
 
 Note: `--toc-depth=3` includes H1–H3 in the TOC. A file at `depth=2` whose source had H1
 and H2 contributes H3 and H4 headings after shifting. Only the H3 appears in the TOC; H4
@@ -628,19 +628,19 @@ if __name__ == "__main__":
 
 ## Quick Reference
 
-| Requirement | How |
-|---|---|
-| Pandoc version | ≥ 3.0 |
-| Title page | `--metadata=title:...` + `--metadata=author:...` |
-| Copyright page | First section with `{.unnumbered}` |
-| Cover image | `--epub-cover-image=cover.png` |
-| Clickable TOC | `--toc --toc-depth=3` |
-| Chapter numbering | `--number-sections` |
-| Chapter splits | `--split-level=2` |
-| Images embedded | `--resource-path=...` (pandoc embeds automatically) |
+| Requirement       | How                                                      |
+| ----------------- | -------------------------------------------------------- |
+| Pandoc version    | ≥ 3.0                                                    |
+| Title page        | `--metadata=title:...` + `--metadata=author:...`         |
+| Copyright page    | First section with `{.unnumbered}`                       |
+| Cover image       | `--epub-cover-image=cover.png`                           |
+| Clickable TOC     | `--toc --toc-depth=3`                                    |
+| Chapter numbering | `--number-sections`                                      |
+| Chapter splits    | `--split-level=2`                                        |
+| Images embedded   | `--resource-path=...` (pandoc embeds automatically)      |
 | Image paths fixed | `rewrite_image_paths()` per source file before combining |
-| E-ink stylesheet | `@epub-style.css` via `--css=...` |
-| Avoid YAML errors | `--from=markdown-yaml_metadata_block` |
-| Footnotes | `[^1]` / `^[inline]` — rendered as ePub pop-ups |
-| Internal links | `[text](#heading-id)` — works across split files |
-| Validate | `java -jar epubcheck.jar book.epub` |
+| E-ink stylesheet  | `@epub-style.css` via `--css=...`                        |
+| Avoid YAML errors | `--from=markdown-yaml_metadata_block`                    |
+| Footnotes         | `[^1]` / `^[inline]` — rendered as ePub pop-ups          |
+| Internal links    | `[text](#heading-id)` — works across split files         |
+| Validate          | `java -jar epubcheck.jar book.epub`                      |
